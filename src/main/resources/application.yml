@@ -1,0 +1,6 @@
+server:
+  port:
+    8000
+  application:
+    name:
+      user-api
