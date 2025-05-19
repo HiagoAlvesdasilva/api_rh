@@ -3,6 +3,7 @@ package br.com.hiago.user_api.services.impl;
 import br.com.hiago.user_api.domain.User;
 import br.com.hiago.user_api.repositories.UserRepository;
 import br.com.hiago.user_api.services.UserService;
+import br.com.hiago.user_api.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Objetc not found"));
     }
 
     @Override
     public List<User> findAll() {
-        List<User> users = userRepository.findAll();
-        System.out.println("Usuarios no banco: "+ users);
-        return users;
-//        return userRepository.findAll();
+       return userRepository.findAll();
     }
 }
